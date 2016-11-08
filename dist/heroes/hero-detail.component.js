@@ -28,7 +28,12 @@ var HeroDetailComponent = (function () {
         });
     };
     HeroDetailComponent.prototype.goBack = function () {
-        this.location.back();
+        this.location.back(); // 이전 페이지로 이동
+    };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
     };
     __decorate([
         core_1.Input(), 

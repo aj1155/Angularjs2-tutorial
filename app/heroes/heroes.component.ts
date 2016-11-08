@@ -24,7 +24,8 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+
   }
 
   onSelect(hero: Hero) {
@@ -33,6 +34,18 @@ export class HeroesComponent implements OnInit {
   gotoDetail(hero: Hero): void{
     let link = ['/detail',this.selectedHero.id];
     this.router.navigate(link);
+  }
+
+  add(heroName : string): void{
+    heroName = heroName.trim();
+    if(!heroName){
+      return ;
+    }
+    this.heroService.create(heroName)
+              .then(hero => {
+                this.heroes.push(hero);
+                this.selectedHero = null;
+              })
   }
 
 }

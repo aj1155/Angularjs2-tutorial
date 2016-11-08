@@ -21,7 +21,7 @@ var HeroesComponent = (function () {
     };
     HeroesComponent.prototype.getHeroes = function () {
         var _this = this;
-        this.heroService.getHeroesSlowly().then(function (heroes) { return _this.heroes = heroes; });
+        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
     };
     HeroesComponent.prototype.onSelect = function (hero) {
         this.selectedHero = hero;
@@ -29,6 +29,18 @@ var HeroesComponent = (function () {
     HeroesComponent.prototype.gotoDetail = function (hero) {
         var link = ['/detail', this.selectedHero.id];
         this.router.navigate(link);
+    };
+    HeroesComponent.prototype.add = function (heroName) {
+        var _this = this;
+        heroName = heroName.trim();
+        if (!heroName) {
+            return;
+        }
+        this.heroService.create(heroName)
+            .then(function (hero) {
+            _this.heroes.push(hero);
+            _this.selectedHero = null;
+        });
     };
     return HeroesComponent;
 }());

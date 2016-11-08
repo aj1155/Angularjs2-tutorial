@@ -57,3 +57,6 @@ button {
 button:hover {
   background-color: #cfd8dc;
 }
+div.add-new-hero{
+  margin-top : 20px;
+}

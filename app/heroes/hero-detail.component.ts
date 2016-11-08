@@ -31,6 +31,11 @@ export class HeroDetailComponent implements OnInit{
   }
 
   goBack(): void{
-    this.location.back();
+    this.location.back(); // 이전 페이지로 이동
+  }
+
+  save(): void {
+    this.heroService.update(this.hero)
+          .then(() => this.goBack());
   }
 }
